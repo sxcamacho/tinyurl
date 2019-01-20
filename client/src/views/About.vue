@@ -1,5 +1,5 @@
 <template>
   <section class="hero text-center">
-    About Me
+    about me
   </section>
 </template>
