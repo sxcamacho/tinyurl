@@ -1,10 +1,10 @@
 <template>
     <div class="result">
       <ul>
-        <li v-for="item in list" :key="item.url">
+        <li v-for="item in list" :key="item.tiny_url">
           <div class="item-info">
             <a :href="item.tiny_url" target="_blanck">
-              <span class="item-tinyurl">{{item.tiny_url}}</span>
+              <span class="item-tinyurl" :class="{grow: copied === item.tiny_url }">{{item.tiny_url}}</span>
             </a>
             <span class="item-url">{{item.url}}</span>
           </div>
@@ -25,7 +25,8 @@ export default {
   name: "ListTinyUrl",
   data() {
     return {
-      listSize: 3
+      listSize: 3,
+      copied: ""
     };
   },
   computed: {
@@ -34,8 +35,11 @@ export default {
     }
   },
   methods: {
-    onCopy: function() {
-      alert("Tiny url copied!");
+    onCopy: function(event) {
+      this.copied = event.text;
+      setTimeout(() => {
+        this.copied = "";
+      }, 300);
     },
     onError: function() {
       alert("Failed to copy url");
@@ -86,9 +90,16 @@ export default {
   font-size: 20px;
   font-weight: bold;
   color: #1274ed;
+  transition: transform 1s;
 }
 
 .item-info {
   width: 90%;
+}
+
+.grow {
+  -webkit-transform: rotateX(360deg);
+  -ms-transform: rotateX(360deg);
+  transform: rotateX(360deg);
 }
 </style>
