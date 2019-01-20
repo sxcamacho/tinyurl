@@ -36,7 +36,7 @@ get '/:id' do |id|
   status 301
 end
 
-post '/' do
+post '/data/shorten' do
   url_to_create = json_params["url"]
   existing_url = TinyUrl.find_by_url(url_to_create)
   unless existing_url.any?
