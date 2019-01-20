@@ -4,7 +4,7 @@
       <input class="input" type="url" name="url" placeholder="Enter your url" v-model="url">
     </div>
     <div class="control">
-      <button class="button button-primary button-block button-shadow" @click="onClickReduceButton">Reduce</button>
+      <button id="button-reduce" class="button button-primary button-block button-shadow" @click="onClickReduceButton">{{buttonText}}</button>
     </div>
   </div>
 </template>
@@ -18,6 +18,14 @@ export default {
       url: ""
     };
   },
+  computed: {
+    loading() {
+      return store.state.loading;
+    },
+    buttonText() {
+      return this.loading ? "Reducing..." : "Reduce";
+    }
+  },
   methods: {
     onClickReduceButton() {
       store.dispatch("reduceUrl", this.url);
@@ -25,3 +33,9 @@ export default {
   }
 };
 </script>
+
+<style>
+#button-reduce {
+  width: 150px;
+}
+</style>

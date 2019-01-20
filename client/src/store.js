@@ -17,18 +17,21 @@ export default new Vuex.Store({
       state.error = error;
     },
     addUrl(state, url) {
-      state.urlList.push(url);
+      state.urlList.unshift(url);
     }
   },
   actions: {
     reduceUrl(context, url) {
       context.commit("setLoading", true);
-      let request = Vue.axios.post(`${process.env.VUE_APP_API_URL}/data/shorten`, { url });
-      request.then((response) => {
+      let request = Vue.axios.post(
+        `${process.env.VUE_APP_API_URL}/data/shorten`,
+        { url }
+      );
+      request.then(response => {
         context.commit("addUrl", response.data);
         context.commit("setLoading", false);
       });
-      request.catch((error) => {
+      request.catch(error => {
         context.commit("setLoading", false);
         context.commit("setErrorMessage", error);
       });
