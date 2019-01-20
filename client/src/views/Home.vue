@@ -28,8 +28,8 @@
                     </g>
                   </svg>
                 </div>
-                <h3 class="feature-title">Discover</h3>
-                <p class="text-sm">Where text is visible, people tend to focus on the textual content rather than upon overall presentation.</p>
+                <h3 class="feature-title">Lorem ipsum</h3>
+                <p class="text-sm">Suspendisse bibendum nibh non purus ullamcorper aliquet. Donec suscipit, dui at lacinia auctor, turpis metus rhoncus felis, pharetra pharetra sem nisi quis nisi.</p>
               </div>
             </div>
             <div class="feature is-revealing">
@@ -42,8 +42,8 @@
                     </g>
                   </svg>
                 </div>
-                <h3 class="feature-title">Discover</h3>
-                <p class="text-sm">Where text is visible, people tend to focus on the textual content rather than upon overall presentation.</p>
+                <h3 class="feature-title">Lorem ipsum</h3>
+                <p class="text-sm">Pellentesque efficitur auctor imperdiet. Nam turpis justo, sodales eu aliquet at, laoreet sit amet lectus. Mauris quis tellus et sapien laoreet malesuada. Nullam egestas nec tellus ut vulputate.</p>
               </div>
             </div>
           </div>
@@ -59,8 +59,8 @@
                     </g>
                   </svg>
                 </div>
-                <h3 class="feature-title">Discover</h3>
-                <p class="text-sm">Where text is visible, people tend to focus on the textual content rather than upon overall presentation.</p>
+                <h3 class="feature-title">Lorem ipsum</h3>
+                <p class="text-sm">Donec pretium, ligula sit amet ultrices lobortis, augue enim elementum eros, ac facilisis sem turpis eu ipsum. Phasellus scelerisque arcu at malesuada ultrices.</p>
               </div>
             </div>
             <div class="feature is-revealing">
@@ -74,8 +74,8 @@
                     </g>
                   </svg>
                 </div>
-                <h3 class="feature-title">Discover</h3>
-                <p class="text-sm">Where text is visible, people tend to focus on the textual content rather than upon overall presentation.</p>
+                <h3 class="feature-title">Lorem ipsum</h3>
+                <p class="text-sm">Quisque risus dolor, venenatis nec mi eget, sagittis porttitor eros. Etiam eget nibh at magna fermentum semper. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
               </div>
             </div>
           </div>
