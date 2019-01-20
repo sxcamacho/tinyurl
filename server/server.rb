@@ -1,6 +1,7 @@
 # server.rb
 require 'sinatra'
 require "sinatra/namespace"
+require 'sinatra/cross_origin'
 require 'mongoid'
 require './models/tiny_url'
 require './serializers/tiny_url_serializer'
@@ -13,8 +14,14 @@ Mongoid.load! "mongoid.config"
 # Load ENV Variables
 Dotenv.load('.env')
 
+set :bind, '0.0.0.0'
+configure do
+  enable :cross_origin
+end
+
 before do
   content_type 'application/json'
+  response.headers['Access-Control-Allow-Origin'] = '*'
 end
 
 # Endpoints
@@ -42,4 +49,11 @@ post '/' do
   else
     serialize(existing_url.first)
   end
+end
+
+options "*" do
+  response.headers["Allow"] = "GET, POST, OPTIONS"
+  response.headers["Access-Control-Allow-Headers"] = "Authorization, Content-Type, Accept, X-User-Email, X-Auth-Token"
+  response.headers["Access-Control-Allow-Origin"] = "*"
+  200
 end
