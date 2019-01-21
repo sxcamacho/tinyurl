@@ -11,10 +11,13 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "moment": "^2.23.0",
     "vue": "^2.5.21",
     "vue-axios": "^2.1.4",
+    "vue-calendar-heatmap": "^0.8.4",
     "vue-clipboard2": "^0.2.1",
     "vue-router": "^3.0.1",
+    "vue2-frappe": "^1.0.28",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

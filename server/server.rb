@@ -51,13 +51,15 @@ get '/:id' do |id|
 end
 
 get '/statistics/:id' do
-  result = []
-  param_id = json_params["id"]
-  statistics = Statistic.aggregate_by_tiny_id(param_id)
-  statistics.each do | data |
-    result.push(serialize_statistic(data))
-  end
-  result
+  halt_if_not_found!
+  statistics = Statistic.aggregate_by_tiny_id(tiny_url.tiny_id)
+  result = statistics.map { |data| serialize_statistic(data) }
+  {
+    tiny_id: tiny_url.tiny_id,
+    tiny_url: tiny_url.tiny_url,
+    url: tiny_url.url,
+    statistics: result
+  }.to_json
 end
 
 post '/data/shorten' do

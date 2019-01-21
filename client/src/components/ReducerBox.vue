@@ -4,7 +4,11 @@
       <input class="input" type="url" name="url" placeholder="Enter your url" v-model="url">
     </div>
     <div class="control">
-      <button id="button-reduce" class="button button-primary button-block button-shadow" @click="onClickReduceButton">{{buttonText}}</button>
+      <button
+        id="button-reduce"
+        class="button button-primary button-block button-shadow"
+        @click="onClickReduceButton"
+      >{{buttonText}}</button>
     </div>
   </div>
 </template>

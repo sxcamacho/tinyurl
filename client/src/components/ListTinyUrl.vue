@@ -1,22 +1,27 @@
 <template>
-    <div class="result">
-      <ul>
-        <li v-for="item in list" :key="item.tiny_url">
-          <div class="item-info">
-            <a :href="item.tiny_url" target="_blanck">
-              <span class="item-tinyurl" :class="{grow: copied === item.tiny_url }">{{item.tiny_url}}</span>
-            </a>
-            <span class="item-url">{{item.url}}</span>
-          </div>
-          <button type="button"
-            v-clipboard:copy="item.tiny_url"
-            v-clipboard:success="onCopy"
-            v-clipboard:error="onError">
-              Copy!
-          </button>
-        </li>
-      </ul>
-    </div>
+  <div class="result">
+    <ul>
+      <li v-for="(item, index) in list" :key="index">
+        <div class="item-info">
+          <a :href="item.tiny_url" target="_blanck">
+            <span class="item-tinyurl" :class="{grow: copied === item.tiny_url }">{{item.tiny_url}}</span>
+          </a>
+          <span class="item-url">{{item.url}}</span>
+        </div>
+        <div>
+          <router-link :to="{ path: `/statistics/${item.tiny_id}` }">
+            <span class="item-views">{{item.count}} requests</span>
+          </router-link>
+        </div>
+        <button
+          type="button"
+          v-clipboard:copy="item.tiny_url"
+          v-clipboard:success="onCopy"
+          v-clipboard:error="onError"
+        >Copy!</button>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -95,6 +100,12 @@ export default {
 
 .item-info {
   width: 90%;
+}
+
+.item-views {
+  width: 120px;
+  font-size: 14px;
+  margin: 0 20px;
 }
 
 .grow {
