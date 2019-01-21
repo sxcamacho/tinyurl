@@ -5,6 +5,7 @@ require 'mongoid'
 require './models/tiny_url'
 require './models/statistic'
 require './serializers/tiny_url_serializer'
+require './serializers/statistic_serializer'
 require './helpers'
 require 'dotenv'
 
@@ -21,7 +22,7 @@ end
 
 before do
   content_type 'application/json'
-  response.headers['Access-Control-Allow-Origin'] = '*'
+  set_headers
 end
 
 # Endpoints
@@ -31,7 +32,6 @@ get '/' do
 end
 
 get '/:id' do |id|
-  cache_control :no_cache
   begin 
     halt_if_not_found!
     # Save Statistic
@@ -40,12 +40,24 @@ get '/:id' do |id|
     statistic.date = DateTime.now
     statistic.save!
   rescue => e
+    puts "*** error *******"
     puts e.message
+    puts "**********"
     status 500
   else
     response.headers['Location'] = tiny_url.url
     status 301
   end
+end
+
+get '/statistics/:id' do
+  result = []
+  param_id = json_params["id"]
+  statistics = Statistic.aggregate_by_tiny_id(param_id)
+  statistics.each do | data |
+    result.push(serialize_statistic(data))
+  end
+  result
 end
 
 post '/data/shorten' do
@@ -56,17 +68,24 @@ post '/data/shorten' do
     new_url.url = url_to_create
     new_url.tiny_id = SecureRandom.hex(4)
     new_url.tiny_url = "#{base_url}/#{new_url.tiny_id}"
-    halt 422, serialize(new_url) unless new_url.save
-    serialize(new_url, 0)
+    halt 422, serialize_tiny_url(new_url) unless new_url.save
+    serialize_tiny_url(new_url, 0)
   else
     count = Statistic.find_by_tiny_id(existing_url.first.tiny_id).count
-    serialize(existing_url.first, count)
+    serialize_tiny_url(existing_url.first, count)
   end
 end
 
-options "*" do
+def set_headers
   response.headers["Allow"] = "GET, POST, OPTIONS"
   response.headers["Access-Control-Allow-Headers"] = "Authorization, Content-Type, Accept, X-User-Email, X-Auth-Token"
   response.headers["Access-Control-Allow-Origin"] = "*"
+  response.headers["Cache-Control"] = "public, no-cache, no-store, max-age=0, must-revalidate"
+  response.headers["Pragma"] = "no-cache"
+  response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
+end
+
+options "*" do
+  set_headers
   200
 end

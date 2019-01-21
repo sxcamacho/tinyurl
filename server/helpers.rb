@@ -19,7 +19,11 @@ helpers do
     halt(404, { message: 'Url Not Found'}.to_json) unless tiny_url
   end
 
-  def serialize(tiny_url, count)
+  def serialize_tiny_url(tiny_url, count)
     TinyUrlSerializer.new(tiny_url, count).to_json
+  end
+
+  def serialize_statistic(statistic)
+    StatisticSerializer.new(statistic).to_json
   end
 end

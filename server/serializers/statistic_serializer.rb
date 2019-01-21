@@ -5,10 +5,9 @@ class StatisticSerializer
 
   def as_json(*)
     data = {
-      date: @statistic.date,
-      tiny_id: @statistic.tiny_id
+      date: @statistic[:_id][:date],
+      count: @statistic[:count]
     }
-    data[:errors] = @statistic.errors if @statistic.errors.any?
     data
   end
 end
